@@ -1,16 +1,47 @@
-# React + Vite
+# Sistema de Gerenciamento de Biblioteca
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema full-stack desenvolvido para o gerenciamento de rotinas de uma biblioteca. A aplicacao permite o controle completo de livros, leitores e o rastreamento do ciclo de vida de emprestimos, incluindo painel de metricas e notificacoes visuais.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Arquitetura do Projeto
 
-## React Compiler
+O projeto foi estruturado utilizando o padrao **Monorepo**, isolando as responsabilidades do cliente (Frontend) e do servidor (Backend) em ambientes independentes, mas contidos no mesmo repositorio, facilitando o desenvolvimento e a orquestracao local.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend:** Single Page Application (SPA) desenvolvida em React utilizando Vite.
+- **Backend:** API RESTful desenvolvida em Node.js com Express.
+- **Banco de Dados:** PostgreSQL rodando em container Docker.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Funcionalidades Principais
+
+* **Dashboard de Metricas:** Painel inicial com indicadores em tempo real de total de livros, leitores, emprestimos ativos e destaque visual para emprestimos atrasados.
+* **Gestao de Livros:** CRUD completo com suporte a upload de imagem de capa e busca parametrizada por titulo ou categoria.
+* **Gestao de Leitores:** CRUD completo de usuarios da biblioteca, validacao de dados e filtros de busca por nome ou documento (CPF/RA).
+* **Gestao de Emprestimos:** Criacao e encerramento de emprestimos, com calculo automatico de status (Em Aberto, Devolvido, Atrasado).
+* **Seguranca e Autenticacao:** Rotas da API e telas do painel protegidas por autenticacao via token (JWT).
+* **Notificacoes (Toast):** Feedback visual em tempo real para acoes de sucesso ou erro (React Toastify).
+
+---
+
+## Tecnologias Utilizadas
+
+### Backend
+* Node.js
+* Express
+* PostgreSQL
+* JsonWebToken (JWT)
+* Multer (Manipulacao de arquivos/uploads)
+* Cors & Dotenv
+
+### Frontend
+* React.js
+* Vite
+* React Router DOM
+* Axios
+* React Toastify
+
+### Infraestrutura
+* Docker
+* Docker Compose
