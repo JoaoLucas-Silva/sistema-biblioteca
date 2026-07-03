@@ -40,11 +40,15 @@ export default function Leitores() {
     }
 
     async function handleCriar(event) {
-        event.preventDefault();
+    event.preventDefault();
+    try {
         await criarLeitor(formData);
         await carregarLeitores(filtrosBusca);
         setFormData(initialFormData);
+    } catch (error) {
+        console.error("Erro ao criar o leitor:", error);
     }
+}
 
     async function handleExcluir(id) {
         if (window.confirm('Tem certeza que deseja excluir este leitor?')) {

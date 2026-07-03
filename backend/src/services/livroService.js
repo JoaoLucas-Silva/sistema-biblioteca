@@ -2,6 +2,7 @@ const { Op } = require('sequelize');
 const { Livro } = require('../models');
 
 async function criarLivro(dados) {
+	dados.quantidade_disponivel = dados.quantidade_total;
 	return Livro.create(dados);
 }
 

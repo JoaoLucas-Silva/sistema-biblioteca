@@ -2,38 +2,33 @@ const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
 const { sequelize, Usuario, Leitor } = require('../models');
 
-async function criarLeitor(dados) {
-	const transacao = await sequelize.transaction();
-
-	try {
-		const senhaCriptografada = await bcrypt.hash(dados.senha, 10);
-
-		const usuario = await Usuario.create(
-			{
-				email: dados.email,
-				senha: senhaCriptografada,
-				perfil: 'LEITOR',
-			},
-			{ transaction: transacao }
-		);
-
-		const leitor = await Leitor.create(
-			{
-				usuario_id: usuario.id,
-				nome: dados.nome,
-				cpf_ra: dados.cpf_ra,
-				telefone: dados.telefone,
-				endereco: dados.endereco,
-			},
-			{ transaction: transacao }
-		);
-
-		await transacao.commit();
-		return leitor;
-	} catch (error) {
-		await transacao.rollback();
-		throw error;
-	}
+async function criarLeitor(dados) { 
+    const transacao = await sequelize.transaction(); 
+    try { 
+        const senhaDoUsuario = dados.senha || dados.cpf_ra;
+        
+        const senhaCriptografada = await bcrypt.hash(senhaDoUsuario, 10); 
+        
+        const usuario = await Usuario.create( { 
+            email: dados.email, 
+            senha: senhaCriptografada, 
+            perfil: 'LEITOR', 
+        }, { transaction: transacao } ); 
+        
+        const leitor = await Leitor.create( { 
+            usuario_id: usuario.id, 
+            nome: dados.nome, 
+            cpf_ra: dados.cpf_ra, 
+            telefone: dados.telefone, 
+            endereco: dados.endereco || 'Não informado',
+        }, { transaction: transacao } ); 
+        
+        await transacao.commit(); 
+        return leitor; 
+    } catch (error) { 
+        await transacao.rollback(); 
+        throw error; 
+    } 
 }
 
 async function listarLeitores(filtros = {}) {
