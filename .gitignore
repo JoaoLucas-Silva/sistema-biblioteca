@@ -1,0 +1,18 @@
+# Dependências
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Configurações do Backend (Essencial para segurança)
+.env
+
+# Build do Frontend (Vite)
+dist/
+dist-ssr/
+
+# Arquivos de Sistema Operacional
+.DS_Store
+Thumbs.db
