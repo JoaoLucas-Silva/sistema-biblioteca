@@ -44,11 +44,13 @@ async function atualizar(req, res) {
 
 async function deletar(req, res) {
 	try {
-		await livroService.deletarLivro(req.params.id);
-		return res.status(204).send();
-	} catch (error) {
-		return res.status(500).json({ message: error.message });
-	}
+    	const id = req.params.id; // Pega o ID que vem na URL
+        await livroService.deletarLivro(id); // Chama aquele serviço que já existe
+        
+        return res.status(200).json({ message: 'Livro excluído com sucesso.' });
+    }catch (error) {
+        return res.status(500).json({ message: error.message || 'Erro ao excluir o livro.' });
+    }
 }
 
 module.exports = {
