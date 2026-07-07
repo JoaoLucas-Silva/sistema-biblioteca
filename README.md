@@ -30,6 +30,7 @@ O projeto foi estruturado utilizando o padrao **Monorepo**, isolando as responsa
 ### Backend
 * Node.js
 * Express
+* Sequelize
 * PostgreSQL
 * JsonWebToken (JWT)
 * Multer (Manipulacao de arquivos/uploads)
